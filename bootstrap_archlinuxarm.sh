@@ -77,7 +77,7 @@ sed -i "/Logfile/d" /opt/fhem/fhem.cfg
 sed -i '/attr global modpath ./c\attr global modpath /opt/fhem' /opt/fhem/fhem.cfg
 
 # Make a service file for FHEM
-FHEM_SERVICE="[Unit]\nDescription=FHEM Perl Server\nAfter=syslog.target network.target\n\n[Service]\nType=forking\nUser=technik\nWorkingDirectory=/opt/fhem\nExecStart=/usr/bin/perl fhem.pl fhem.cfg\nRestart=always\nRestartSec=5\n\n[Install]\nWantedBy=multi-user.target"
+FHEM_SERVICE="[Unit]\nDescription=FHEM Perl Server\nAfter=syslog.target network.target\n\n[Service]\nType=forking\nUser=root\nWorkingDirectory=/opt/fhem\nExecStart=/usr/bin/perl fhem.pl fhem.cfg\nRestart=always\nRestartSec=5\n\n[Install]\nWantedBy=multi-user.target"
 echo -e $FHEM_SERVICE > /etc/systemd/system/fhem.service
 chmod u+x /etc/systemd/system/fhem.service
 systemctl daemon-reload
